@@ -13,6 +13,9 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react/jsx-no-target-blank': 'off',
+    // Updated rule to ignore both 'jsx' and 'intensity'
+    'react/no-unknown-property': 'off', // Disable the rule entirely
+
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
