@@ -5,23 +5,32 @@ import { services } from "../../constants/constants";
 import { fadeIn, textVariant } from "../../utils/motion";
 import { SectionWrapper } from "../../hoc";
 
-export const ServiceCard = ({ index, title, icon }) => {
+export const ServiceCard = ({ index, title, icon, university, date }) => {
   return (
-    <Tilt className="xs:w-[250px] w-full">
-      <motion.div
-        variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
-        className="w-full green-pink-gradient  p-[1px] rounded-[20px] shadow-card"
-      >
-        <div
-          options={{ max: 45, scale: 1, speed: 450 }}
-          className="bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px]"
+    <Tilt className=" w-full" options={{ scale: 1.02, max: 10 }}>
+      <div>
+        <img src={icon} alt={title} className="w-16 h-16 object-contain scale-150" />
+
+        <motion.div
+          variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
+          className="w-full green-pink-gradient  p-[1px] rounded-[20px] shadow-card"
+          whileHover={{ scale: 1.01, x: -2, y: -2 }}
+          whileTap={{ scale: 0.99 }}
         >
-          <img src={icon} alt={title} className="w-16 h-16 object-contain" />
-          <h3 className="text-white text-[20px] font-bold text-center ">
-            {title}
-          </h3>
-        </div>
-      </motion.div>
+          <div
+            options={{ max: 45, scale: 0.99, speed: 450 }}
+            className="bg-tertiary rounded-[20px] py-5 px-12 min-h-[150px]"
+          >
+            <h3 className="text-white text-[20px] font-bold text-center ">
+              {title}
+            </h3>
+            <p className="text-white text-[14px] text-center mt-2">
+              {university}
+            </p>
+            <p className="text-white text-[14px] text-center mt-1">{date}</p>
+          </div>
+        </motion.div>
+      </div>
     </Tilt>
   );
 };
@@ -45,7 +54,7 @@ const About = () => {
         fueled by a relentless drive for success.
       </motion.p>
 
-      <div className="mt-20 flex flex-wrap gap-10">
+      <div className="mt-20 flex flex-col gap-10">
         {services.map((service, index) => (
           <ServiceCard key={`service-${service.title}`} index={index} {...service} />
         ))}
